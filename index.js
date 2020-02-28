@@ -10,17 +10,6 @@ const bot = new Discord.Client();
 const URL = 'https://gg.deals';
 const HOT_DEALS_URI = '/deals/hot-new-deals/';
 
-async function getContents() {
-    const response = await axios.get(URL + HOT_DEALS_URI);
-
-    if (response.status !== 200) {
-        console.log(response.statusText);
-        return false;
-    }
-
-    return cheerio.load(response.data);
-}
-
 function getMessage(title, link, discount, beforePrice, newPrice) {
     return `Name: ${title}\nDiscount: ${discount}\nPrice: ${newPrice} (${beforePrice})\nLink: ${URL + link}`;
 }
@@ -30,7 +19,14 @@ bot.on('ready', () => {
 });
 
 bot.setInterval(async () => {
-    const $ = await getContents();
+    const response = await axios.get(URL + HOT_DEALS_URI);
+
+    if (response.status !== 200) {
+        console.log(response.statusText);
+        return false;
+    }
+
+    $ = cheerio.load(response.data);
 
     $('div.game-list-item').each((i, element) => {
         const title = $(element).find('div.title-line').first().text();
