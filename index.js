@@ -1,25 +1,22 @@
 const axios = require('axios');
+const Discord = require('discord.js');
 const cheerio = require('cheerio');
 require('dotenv').config();
 
-const BEST_DEALS_CHANNEL = process.env.CHANNEL_ID;
 
-const Discord = require('discord.js');
-const bot = new Discord.Client();
-
-const URL = 'https://gg.deals';
+const HOT_DEALS_URL = 'https://gg.deals';
 const HOT_DEALS_URI = '/deals/hot-new-deals/';
-
-function getMessage(title, link, discount, beforePrice, newPrice) {
-    return `Name: ${title}\nDiscount: ${discount}\nPrice: ${newPrice} (${beforePrice})\nLink: ${URL + link}`;
-}
+const INTERVAL_TIME = 86400000; // daily
+const BEST_DEALS_CHANNEL = process.env.CHANNEL_ID;
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const bot = new Discord.Client();
 
 bot.on('ready', () => {
     console.log(`Bot ready as ${bot.user.tag}`);
 });
 
 bot.setInterval(async () => {
-    const response = await axios.get(URL + HOT_DEALS_URI);
+    const response = await axios.get(HOT_DEALS_URL + HOT_DEALS_URI);
 
     if (response.status !== 200) {
         console.log(response.statusText);
@@ -35,10 +32,12 @@ bot.setInterval(async () => {
         const beforePrice = $(element).find('span.double-line').children('span.bottom').text();
         const newPrice = $(element).find('span.double-line').children('span.numeric').text();
 
-        bot.channels.get(BEST_DEALS_CHANNEL).sendMessage(getMessage(title, link, discount, beforePrice, newPrice));
+        bot.channels
+            .get(BEST_DEALS_CHANNEL)
+            .sendMessage(`Name: ${title}\nDiscount: ${discount}\nPrice: ${newPrice} (${beforePrice})\nLink: ${HOT_DEALS_URL + link}`);
     });
-}, 86400000);
+}, INTERVAL_TIME);
 
-bot.login(process.env.BOT_TOKEN)
+bot.login(BOT_TOKEN)
     .then(() => console.log('App started...'))
     .catch(err => console.log(err));
