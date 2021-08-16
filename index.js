@@ -12,7 +12,7 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const bot = new Discord.Client();
 
 bot.on('ready', () => {
-    console.log(`Bot ready as ${bot.user.tag}`);
+    console.log(`Bot ready as ${ bot.user.tag }`);
 });
 
 bot.setInterval(async () => {
@@ -32,10 +32,15 @@ bot.setInterval(async () => {
         const beforePrice = $(element).find('span.double-line').children('span.bottom').text();
         const newPrice = $(element).find('span.double-line').children('span.numeric').text();
 
-        bot.channels
-            .get(BEST_DEALS_CHANNEL)
-            .sendMessage(`Name: ${title}\nDiscount: ${discount}\nPrice: ${newPrice} (${beforePrice})\nLink: ${HOT_DEALS_URL + link}`);
+        setTimeout(() =>
+            bot.channels
+                .get(BEST_DEALS_CHANNEL)
+                .sendMessage(`Name: ${ title }\nDiscount: ${ discount }\nPrice: ${ newPrice } (${ beforePrice })\nLink: ${ HOT_DEALS_URL + link }`),
+            3000 * i
+        );
     });
+
+
 }, INTERVAL_TIME);
 
 bot.login(BOT_TOKEN)
