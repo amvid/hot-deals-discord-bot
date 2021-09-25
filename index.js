@@ -26,16 +26,16 @@ bot.setInterval(async () => {
     $ = cheerio.load(response.data);
 
     $('div.game-list-item').each((i, element) => {
-        const title = $(element).find('div.title-line').first().text();
-        const link = $(element).find('a.price-widget').attr('href');
-        const discount = $(element).find('span.before-price-wrapper').first().text();
-        const beforePrice = $(element).find('span.double-line').children('span.bottom').text();
-        const newPrice = $(element).find('span.double-line').children('span.numeric').text();
+        const title = $(element).find('a.title').first().text();
+        const link = $(element).find('a.full-link').attr('href');
+        const discount = $(element).find('span.discount-badge').text();
+        const beforePrice = $(element).find('span.price-old').text();
+        const newPrice = $(element).find('span.game-price-new').text();
 
         setTimeout(() =>
             bot.channels
                 .get(BEST_DEALS_CHANNEL)
-                .sendMessage(`Name: ${ title }\nDiscount: ${ discount }\nPrice: ${ newPrice } (${ beforePrice })\nLink: ${ HOT_DEALS_URL + link }`),
+                .sendMessage(`${ discount } ${ title }\n${ newPrice } (${ beforePrice })\n${ HOT_DEALS_URL + link }`),
             3000 * i
         );
     });
