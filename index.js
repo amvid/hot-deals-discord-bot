@@ -35,7 +35,7 @@ bot.setInterval(async () => {
         setTimeout(() =>
             bot.channels
                 .get(BEST_DEALS_CHANNEL)
-                .sendMessage(`${ discount } ${ title }\n${ newPrice } (${ beforePrice })\n${ HOT_DEALS_URL + link }`),
+                .send(`${ discount } ${ title }\n${ newPrice } (${ beforePrice })\n${ HOT_DEALS_URL + link }`),
             3000 * i
         );
     });
