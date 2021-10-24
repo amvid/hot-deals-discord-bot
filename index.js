@@ -27,6 +27,11 @@ bot.setInterval(async () => {
 
     $('div.game-list-item').each((i, element) => {
         const title = $(element).find('a.title').first().text();
+
+        if (title === undefined) {
+            return;
+        }
+
         const link = $(element).find('a.full-link').attr('href');
         const discount = $(element).find('span.discount-badge').text();
         const beforePrice = $(element).find('span.price-old').text();
