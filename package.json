@@ -4,7 +4,8 @@
   "description": "Scrapping hot deals from gg.deals and sending result via discord.js",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "watch": "nodemon index.js"
   },
   "keywords": [],
   "author": "Vadim Filipovsky <vadim.filipovsky@gmail.com>",
@@ -14,5 +15,8 @@
     "cheerio": "^1.0.0-rc.10",
     "discord.js": "^11.6.4",
     "dotenv": "^8.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
   }
 }
