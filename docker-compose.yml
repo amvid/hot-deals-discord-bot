@@ -3,8 +3,8 @@ version: "3.7"
 services:
   hot-deals:
     container_name: hot-deals-bot
-    image: node:14-alpine
+    build: .
     working_dir: /app
     volumes:
       - .:/app
-    command: sh -c "npm ci && npm run watch"
+    command: sh -c "pnpm i && pnpm run watch"
