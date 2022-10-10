@@ -10,3 +10,9 @@ services:
     working_dir: /app
     volumes:
       - .:/app
+
+  hot-deals-prod:
+    container_name: hot-deals-bot-prod
+    build:
+      context: .
+      target: prod
