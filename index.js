@@ -1,6 +1,6 @@
-const axios = require("axios");
-const Discord = require("discord.js");
-const cheerio = require("cheerio");
+import { get } from "axios";
+import { Client } from "discord.js";
+import { load } from "cheerio";
 require("dotenv").config();
 
 const HOT_DEALS_URL = "https://gg.deals";
@@ -8,21 +8,21 @@ const HOT_DEALS_URI = "/deals/hot-new-deals/";
 const INTERVAL_TIME = 86400000; // daily
 const BEST_DEALS_CHANNEL = process.env.CHANNEL_ID;
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const bot = new Discord.Client();
+const bot = new Client();
 
 bot.on("ready", () => {
   console.log(`Bot ready as ${bot.user.tag}`);
 });
 
 bot.setInterval(async () => {
-  const response = await axios.get(HOT_DEALS_URL + HOT_DEALS_URI);
+  const response = await get(HOT_DEALS_URL + HOT_DEALS_URI);
 
   if (response.status !== 200) {
     console.log(response.statusText);
     return false;
   }
 
-  $ = cheerio.load(response.data);
+  $ = load(response.data);
 
   $("div.game-list-item").each((i, element) => {
     const title = $(element).find("a.title").first().text();
