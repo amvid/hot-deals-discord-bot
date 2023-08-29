@@ -1,5 +1,5 @@
 {
-  "name": "games-hot-deals",  
+  "name": "games-hot-deals",
   "version": "1.0.0",
   "author": "Vadim Filipovsky <vadim.filipovsky@gmail.com>",
   "keywords": [],
@@ -13,8 +13,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "cheerio": "^1.0.0-rc.10",
-    "discord.js": "^11.6.4",
-    "dotenv": "^8.6.0"
+    "discord.js": "^11.6.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

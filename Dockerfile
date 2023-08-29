@@ -1,23 +1,21 @@
-FROM node:14-alpine AS base
+FROM oven/bun AS base
 
-RUN npm i -g pnpm
-
-COPY package.json pnpm-lock.yaml ./
+COPY package.json bun.lockb ./
 
 
 FROM base AS dev
 
-RUN pnpm i
+RUN bun install
 
 COPY . .
 
-CMD ["pnpm", "run", "watch"]
+CMD ["bun", "--hot", "run", "index.js"]
 
 
 FROM base AS prod
 
-RUN pnpm i --prod
+RUN bun install --production
 
 COPY . . 
 
-CMD ["node", "index.js"]
+CMD ["bun", "index.js"]

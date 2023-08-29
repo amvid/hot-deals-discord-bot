@@ -1,7 +1,6 @@
 const axios = require("axios");
 const Discord = require("discord.js");
 const cheerio = require("cheerio");
-require("dotenv").config();
 
 const HOT_DEALS_URL = "https://gg.deals";
 const HOT_DEALS_URI = "/deals/hot-new-deals/";
