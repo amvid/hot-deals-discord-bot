@@ -2,20 +2,17 @@
   "name": "games-hot-deals",
   "version": "1.0.0",
   "author": "Vadim Filipovsky <vadim.filipovsky@gmail.com>",
-  "keywords": [],
-  "description": "Scrapping hot deals from gg.deals and sending result via discord.js",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "watch": "nodemon index.js"
-  },
-  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.4",
     "cheerio": "^1.0.0-rc.10",
     "discord.js": "^11.6.4"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
+  "description": "Scrapping hot deals from gg.deals and sending result via discord.js",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {
+    "start": "bun index.js",
+    "watch": "bun --hot index.js"
   }
 }
