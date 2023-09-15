@@ -21,7 +21,7 @@ setInterval(async () => {
     return false;
   }
 
-  $ = cheerio.load(response.data);
+  const $ = cheerio.load(response.data);
 
   $("div.game-list-item").each((i, element) => {
     const title = $(element).find("a.title").first().text();
@@ -34,7 +34,7 @@ setInterval(async () => {
     const discount = $(element).find("span.discount-badge").text();
     const beforePrice = $(element).find("span.price-old").text();
     const newPrice = $(element).find("span.game-price-new").text();
-
+   
     setTimeout(
       () =>
         bot.channels
@@ -50,6 +50,6 @@ setInterval(async () => {
 }, INTERVAL_TIME);
 
 bot
-  .login(BOT_TOKEN)
-  .then(() => console.log("App started..."))
-  .catch((err) => console.log(err));
+ .login(BOT_TOKEN)
+ .then(() => console.log("App started..."))
+ .catch((err) => console.log(err));
