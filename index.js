@@ -1,19 +1,19 @@
-const axios = require("axios");
-const Discord = require("discord.js");
-const cheerio = require("cheerio");
+import axios from "axios";
+import { Client, GatewayIntentBits } from "discord.js";
+import cheerio from "cheerio";
 
 const HOT_DEALS_URL = "https://gg.deals";
 const HOT_DEALS_URI = "/deals/hot-new-deals/";
 const INTERVAL_TIME = 86400000; // daily
 const BEST_DEALS_CHANNEL = process.env.CHANNEL_ID;
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const bot = new Discord.Client();
+const bot = new Client({ intents: [GatewayIntentBits.Guilds]});
 
 bot.on("ready", () => {
   console.log(`Bot ready as ${bot.user.tag}`);
 });
 
-bot.setInterval(async () => {
+setInterval(async () => {
   const response = await axios.get(HOT_DEALS_URL + HOT_DEALS_URI);
 
   if (response.status !== 200) {
