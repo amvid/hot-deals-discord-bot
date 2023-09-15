@@ -7,7 +7,7 @@ const HOT_DEALS_URI = "/deals/hot-new-deals/";
 const INTERVAL_TIME = 86400000; // daily
 const BEST_DEALS_CHANNEL = process.env.CHANNEL_ID;
 const BOT_TOKEN = process.env.BOT_TOKEN;
-const bot = new Client({ intents: [GatewayIntentBits.Guilds]});
+const bot = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 bot.on("ready", () => {
   console.log(`Bot ready as ${bot.user.tag}`);
@@ -34,7 +34,7 @@ setInterval(async () => {
     const discount = $(element).find("span.discount-badge").text();
     const beforePrice = $(element).find("span.price-old").text();
     const newPrice = $(element).find("span.game-price-new").text();
-   
+
     setTimeout(
       () =>
         bot.channels
@@ -50,6 +50,6 @@ setInterval(async () => {
 }, INTERVAL_TIME);
 
 bot
- .login(BOT_TOKEN)
- .then(() => console.log("App started..."))
- .catch((err) => console.log(err));
+  .login(BOT_TOKEN)
+  .then(() => console.log("App started..."))
+  .catch((err) => console.log(err));
