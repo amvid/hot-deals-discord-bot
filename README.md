@@ -3,7 +3,7 @@
 Docker image:
 
 ```bash
-BOT_TOKEN=your-bot-token CHANNEL_ID=your-channel-id docker run -d --name=hot-deals-discord-bot vfilipovsky/hot-deals-discord-bot
+BOT_TOKEN=your-bot-token CHANNEL_ID=your-channel-id docker run -d --name=hot-deals-discord-bot amvid/hot-deals-discord-bot
 ```
 
 ```bash
